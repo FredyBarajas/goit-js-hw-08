@@ -1,11 +1,11 @@
 import throttle from 'lodash.throttle';
 const form = document.querySelector('.feedback-form');
-const email = document.querySelector('input');
-const message = document.querySelector('textarea');
+const inputEmail = document.querySelector('input');
+const inputMessage = document.querySelector('textarea');
 
 let data = {
-  inputEmail: '',
-  inputMessage: '',
+  email: '',
+  message: '',
 };
 
 const savedData = localStorage.getItem('feedback-form-state');
@@ -13,23 +13,23 @@ if (savedData) {
   try {
     const parsedData = JSON.parse(savedData);
     data = {
-      inputEmail: parsedData.inputEmail || '',
-      inputMessage: parsedData.inputMessage || '',
+      email: parsedData.inputEmail || '',
+      message: parsedData.inputMessage || '',
     };
   } catch (error) {
     console.error('Error al analizar el JSON:', error);
   }
 }
 
-email.value = data.inputEmail;
-message.value = data.inputMessage;
+inputEmail.value = data.email;
+inputMessage.value = data.message;
 
-email.addEventListener('input', throttle(saveData, 500));
-message.addEventListener('input', throttle(saveData, 500));
+inputEmail.addEventListener('input', throttle(saveData, 500));
+inputMessage.addEventListener('input', throttle(saveData, 500));
 
 function saveData() {
-  data.inputEmail = email.value;
-  data.inputMessage = message.value;
+  data.email = inputEmail.value;
+  data.message = inputMessage.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(data));
 }
 
