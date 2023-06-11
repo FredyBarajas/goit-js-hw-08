@@ -38,5 +38,6 @@ form.addEventListener('submit', send);
 function send(event) {
   event.preventDefault();
   form.reset();
+  console.log(data);
   localStorage.removeItem('feedback-form-state');
 }
